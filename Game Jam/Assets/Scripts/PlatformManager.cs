@@ -20,6 +20,11 @@ public class PlatformManager : MonoBehaviour
     [Tooltip("The movement speed of the platform.")]
     public float moveSpeed = 10.0f;
     /// <summary>
+    /// Rotation speed of the chunk.
+    /// </summary>
+    [Tooltip("Rotation speed of the chunk.")]
+    public float rotSpeed = 10.0f;
+    /// <summary>
     /// The type of platform.
     /// </summary>
     [Tooltip("The type of platform.")]
@@ -46,16 +51,17 @@ public class PlatformManager : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        // moves the platform down towards the player
         transform.Translate(m_moveDirection * moveSpeed * Time.deltaTime, Space.World);
         // destroys the platform once it is out of view
         if (spawnPoint.position.z < 0.0f)
         {
             Destroy(gameObject, lifeTime);
-            //transform.RotateAround(player.transform.position, transform.up, Time.deltaTime)
         }
-        if (transform.position.z < 0.0f)
+        // once the player gets to the curved platform it will start rotating
+        if (platformType == PlatformType.Curved && transform.position.z < 0.0f && spawnPoint.position.z > 0.0f)
         {
-
+            GetComponentInParent<EndlessPlatformGenerator>().Rotate(rotSpeed);
         }
     }
 }

@@ -1550,6 +1550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 50
+  rotSpeed: 35
   platformType: 1
   lifeTime: 1
   spawnPoint: {fileID: 767003441943630705}

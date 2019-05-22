@@ -17,11 +17,6 @@ public class EndlessPlatformGenerator : MonoBehaviour
     [Tooltip("The number of curved chunks consecutively generated before a random generation occurs again.")]
     public int numOfCurvedPlatformsBeforeRegen = 5;
     /// <summary>
-    /// Used to specify the random generation.
-    /// </summary>
-    [Tooltip("Used to specify the random generation.")]
-    public int seed = 0;
-    /// <summary>
     /// Collection of different possible straight platforms.
     /// </summary>
     [Tooltip("Collection of different possible straight platforms.")]
@@ -82,10 +77,8 @@ public class EndlessPlatformGenerator : MonoBehaviour
         // checks if any platforms have been generated yet or it is time to potentially start spawning a different type of platform
         if (m_numOfStraightPlatforms == numOfStraightPlatformsBeforeRegen || m_numOfCurvedPlatforms == numOfCurvedPlatformsBeforeRegen)
         {
-            // initialises the pseudo random number generator
-            System.Random prng = new System.Random(seed);
             // chooses a random odd or even number to determine the platform type
-            m_platformType = (prng.Next(-100000, 100000) % 2 != 0) ? PlatformManager.PlatformType.Straight : PlatformManager.PlatformType.Curved;
+            m_platformType = (Random.Range(-100000, 100000) % (straightPlatforms.Length + curvedPlatforms.Length) != 0) ? PlatformManager.PlatformType.Straight : PlatformManager.PlatformType.Curved;
             Debug.Log(m_platformType);
             // checks if the platform type is straight
             if (m_platformType == PlatformManager.PlatformType.Straight)
@@ -100,10 +93,8 @@ public class EndlessPlatformGenerator : MonoBehaviour
         // checks if a straight platform should be created
         if (m_platformType == PlatformManager.PlatformType.Straight && m_numOfStraightPlatforms < numOfStraightPlatformsBeforeRegen)
         {
-            // initialises the pseudo random number generator
-            System.Random prng = new System.Random(seed);
             // chooses a random type of straight platform
-            int straightPlatformIndex = prng.Next(-100000, 100000) % straightPlatforms.Length;
+            int straightPlatformIndex = Random.Range(-100000, 100000) % straightPlatforms.Length;
             GameObject platform = Instantiate(straightPlatforms[straightPlatformIndex], spawnPoint.position, spawnPoint.rotation);
             platform.transform.parent = transform;
             // creates a platform of the random type at the spawn point
@@ -115,12 +106,10 @@ public class EndlessPlatformGenerator : MonoBehaviour
         // checks if a straight platform should be created
         else if (m_platformType == PlatformManager.PlatformType.Curved && m_numOfCurvedPlatforms < numOfCurvedPlatformsBeforeRegen)
         {
-            // initialises the pseudo random number generator
-            System.Random prng = new System.Random(seed);
             // chooses a random type of curved platform
-            int curvedPlatformIndex = prng.Next(-100000, 100000) % straightPlatforms.Length;
+            int curvedPlatformIndex = Random.Range(-100000, 100000) % curvedPlatforms.Length;
             GameObject platform = Instantiate(curvedPlatforms[curvedPlatformIndex], spawnPoint.position, spawnPoint.rotation);
-            platform.transform.parent = transform.parent;
+            platform.transform.parent = transform;
             // creates a platform of the random type at the spawn point
             platforms.Enqueue(platform);
             // increments the count of the number of consecutive curved platforms that have been spawned
@@ -134,19 +123,32 @@ public class EndlessPlatformGenerator : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        // checks if there aren't any platforms or if the distance between player and the spawn point is less than or equal to the distance threshold
-        if (platforms.Count == 0 || Vector3.Distance(player.transform.position, spawnPoint.position) <= spawnDistThreshold)
+        if (platforms.Count > 0)
         {
-            Debug.Log(Vector3.Distance(player.transform.position, spawnPoint.position));
-            // generates a platform
-            GeneratePlatform();
+            // checks if the first object has been destroyed and removes it from the collection
+            if (platforms.ToArray()[0] == null)
+            {
+                platforms.Dequeue();
+            }
+            // checks if the distance between player and the spawn point is less than or equal to the distance threshold
+            if (Vector3.Distance(player.transform.position, spawnPoint.position) <= spawnDistThreshold)
+            {
+                GeneratePlatform();
+            }
         }
-        // checks if the first object has been destroyed and removes it from the collection
-        if (platforms.ToArray()[0] == null)
+        else
         {
-            platforms.Dequeue();
+            GeneratePlatform();
         }
     }
 
-    public void Rotate
+    /// <summary>
+    /// Rotates all chunks.
+    /// </summary>
+    /// <param name="rotSpeed">Scalar for the rotation speed.</param>
+    public void Rotate(float rotSpeed)
+    {
+        // rotates around a local up axis
+        transform.Rotate(transform.up, -rotSpeed * Time.deltaTime);
+    }
 }

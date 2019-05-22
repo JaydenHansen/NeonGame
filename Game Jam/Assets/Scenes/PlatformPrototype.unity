@@ -386,7 +386,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numOfStraightPlatformsBeforeRegen: 2
   numOfCurvedPlatformsBeforeRegen: 1
-  seed: 0
   straightPlatforms:
   - {fileID: 2795485308055884508, guid: a3258cced6a68844d8de50310e31ecbe, type: 3}
   curvedPlatforms:
@@ -479,6 +478,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4929106493386745208, guid: 0b865e59eaba3ee4b9722989074c6ff3,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4929106493386745208, guid: 0b865e59eaba3ee4b9722989074c6ff3,
+        type: 3}
+      propertyPath: lifeTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4929106493386745208, guid: 0b865e59eaba3ee4b9722989074c6ff3,
+        type: 3}
+      propertyPath: spawnPoint
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b865e59eaba3ee4b9722989074c6ff3, type: 3}
