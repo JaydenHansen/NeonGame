@@ -31,34 +31,31 @@ public class PlatformManager : MonoBehaviour
     public float lifeTime;
 
     /// <summary>
-    /// Stored move direction to reduce memory footprint.
+    /// The location where the next platform will spawn.
     /// </summary>
-    private Vector3 m_moveDirection;
+    [Tooltip("The location where the next platform will spawn.")]
+    public Transform spawnPoint;
 
     /// <summary>
-    /// Initialises the direction of the platform movement.
+    /// Stored move direction to reduce memory footprint.
     /// </summary>
-    private void Awake()
-    {
-        if (platformType == PlatformType.Straight)
-        {
-            // into the screen for straight platforms
-            m_moveDirection = new Vector3(0, 0, -1);
-        }
-    }
+    private Vector3 m_moveDirection = new Vector3(0, 0, -1);
+
     /// <summary>
     /// Moves the platform each frame.
     /// </summary>
     private void Update()
     {
-        if (platformType == PlatformType.Straight)
-        {
-            transform.Translate(m_moveDirection * moveSpeed * Time.deltaTime);
-        }
+        transform.Translate(m_moveDirection * moveSpeed * Time.deltaTime, Space.World);
         // destroys the platform once it is out of view
-        if (transform.position.z < 0.0f)
+        if (spawnPoint.position.z < 0.0f)
         {
             Destroy(gameObject, lifeTime);
+            //transform.RotateAround(player.transform.position, transform.up, Time.deltaTime)
+        }
+        if (transform.position.z < 0.0f)
+        {
+
         }
     }
 }
