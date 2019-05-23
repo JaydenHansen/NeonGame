@@ -6,10 +6,16 @@ ModelImporter:
     100000: //RootNode
     400000: //RootNode
     2100000: lambert1
+    2100002: Roadblock
     2300000: //RootNode
     3300000: //RootNode
     4300000: RoadBlock_001
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Roadblock
+    second: {fileID: 2100000, guid: fbb9f0c68c2706c46900a6cd1d98b87c, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
