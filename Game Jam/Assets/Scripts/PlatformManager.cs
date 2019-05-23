@@ -6,11 +6,12 @@
 public class PlatformManager : MonoBehaviour
 {
     /// <summary>
-    /// Used to distinguish between straight and curved platforms.
+    /// Used to distinguish between different types of platforms.
     /// </summary>
     public enum PlatformType
     {
         Straight,
+        Tunnel,
         Curved
     }
 
@@ -57,6 +58,16 @@ public class PlatformManager : MonoBehaviour
         if (spawnPoint.position.z < 0.0f)
         {
             Destroy(gameObject, lifeTime);
+        }
+        if (platformType == PlatformType.Curved)
+        {
+            if (transform.position.z < 0.0f)
+            {
+                if (spawnPoint.position.z > 0.0f)
+                {
+
+                }
+            }
         }
         // once the player gets to the curved platform it will start rotating
         if (platformType == PlatformType.Curved && transform.position.z < 0.0f && spawnPoint.position.z > 0.0f)
