@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1443297059681210402}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8241834853559222282}
   - {fileID: 5455500085037761846}
@@ -76,7 +76,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4885460466414163763}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 381.00003}
+  m_LocalPosition: {x: 0, y: 0, z: 38.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4439760478672773547}
@@ -152,17 +152,17 @@ PrefabInstance:
     - target: {fileID: 1921297670923709624, guid: 0ab14800657983c46bb9d6e9b76ea4ea,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1921297670923709624, guid: 0ab14800657983c46bb9d6e9b76ea4ea,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1921297670923709624, guid: 0ab14800657983c46bb9d6e9b76ea4ea,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ab14800657983c46bb9d6e9b76ea4ea, type: 3}
@@ -192,22 +192,22 @@ PrefabInstance:
     - target: {fileID: 4049452358599426756, guid: fcfbc28a67105aa4a945e086954c75ed,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 141.4
+      value: 14.14
       objectReference: {fileID: 0}
     - target: {fileID: 4049452358599426756, guid: fcfbc28a67105aa4a945e086954c75ed,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 54
+      value: 5.4
       objectReference: {fileID: 0}
     - target: {fileID: 4049452358599426756, guid: fcfbc28a67105aa4a945e086954c75ed,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4049452358599426756, guid: fcfbc28a67105aa4a945e086954c75ed,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4049452358599426756, guid: fcfbc28a67105aa4a945e086954c75ed,
         type: 3}
@@ -217,7 +217,7 @@ PrefabInstance:
     - target: {fileID: 4049452358599426756, guid: fcfbc28a67105aa4a945e086954c75ed,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.79999995
+      value: 0.08
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcfbc28a67105aa4a945e086954c75ed, type: 3}
@@ -242,22 +242,22 @@ PrefabInstance:
     - target: {fileID: 4049452358599426756, guid: fcfbc28a67105aa4a945e086954c75ed,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -141.40001
+      value: -14.14
       objectReference: {fileID: 0}
     - target: {fileID: 4049452358599426756, guid: fcfbc28a67105aa4a945e086954c75ed,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 54
+      value: 5.4
       objectReference: {fileID: 0}
     - target: {fileID: 4049452358599426756, guid: fcfbc28a67105aa4a945e086954c75ed,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4049452358599426756, guid: fcfbc28a67105aa4a945e086954c75ed,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4049452358599426756, guid: fcfbc28a67105aa4a945e086954c75ed,
         type: 3}
@@ -267,7 +267,7 @@ PrefabInstance:
     - target: {fileID: 4049452358599426756, guid: fcfbc28a67105aa4a945e086954c75ed,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.79999995
+      value: 0.08
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcfbc28a67105aa4a945e086954c75ed, type: 3}
