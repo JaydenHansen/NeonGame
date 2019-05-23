@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4b5d5c808f2dbfd419269fc9b765e361
+guid: 819a8bf22a76f8041a1ed67570da6f17
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -8,8 +8,7 @@ ModelImporter:
     2100000: lambert1
     2300000: //RootNode
     3300000: //RootNode
-    4300000: RoadBlock_001
-    4300002: TaskForceBarrier
+    4300000: RoadHole_002
   externalObjects: {}
   materials:
     importMaterials: 1
