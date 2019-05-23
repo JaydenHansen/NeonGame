@@ -44,10 +44,15 @@ public class EndlessPlatformGenerator : MonoBehaviour
     [Tooltip("The location where the platform will get spawned at.")]
     public Transform spawnPoint;
     /// <summary>
+    /// The distance between the player and the spawn point.
+    /// </summary>
+    [Tooltip("The distance between the player and the spawn point.")]
+    public float spawnDistThreshold = 100.0f;
+    /// <summary>
     /// The distance between the last chunk and the spawn point.
     /// </summary>
     [Tooltip("The distance between the last chunk and the spawn point.")]
-    public float spawnDistThreshold = 100.0f;
+    public float spawnSeparation = 10.0f;
 
     /// <summary>
     /// Collection of all spawned chunks.
@@ -165,7 +170,7 @@ public class EndlessPlatformGenerator : MonoBehaviour
             // chooses a random type of straight platform
             int straightPlatformIndex = Random.Range(-100000, 100000) % straightPlatforms.Length;
             // creates a platform of the random type at the spawn point
-            GameObject platform = Instantiate(straightPlatforms[straightPlatformIndex], spawnPoint.position + spawnPoint.localPosition, spawnPoint.rotation);
+            GameObject platform = Instantiate(straightPlatforms[straightPlatformIndex], spawnPoint.position + spawnSeparation, spawnPoint.rotation);
             platform.transform.parent = transform;
             platforms.Enqueue(platform);
             // increments the count of the number of consecutive straight platforms that have been spawned
@@ -179,7 +184,7 @@ public class EndlessPlatformGenerator : MonoBehaviour
             // chooses a random type of curved platform
             int curvedPlatformIndex = Random.Range(-100000, 100000) % curvedPlatforms.Length;
             // creates a platform of the random type at the spawn point
-            GameObject platform = Instantiate(curvedPlatforms[curvedPlatformIndex], spawnPoint.position, spawnPoint.rotation);
+            GameObject platform = Instantiate(curvedPlatforms[curvedPlatformIndex], spawnPoint.position + spawnSeparation, spawnPoint.rotation);
             platform.transform.parent = transform;
             platforms.Enqueue(platform);
             // increments the count of the number of consecutive curved platforms that have been spawned
@@ -194,7 +199,7 @@ public class EndlessPlatformGenerator : MonoBehaviour
             int tunnelPlatformIndex = Random.Range(-100000, 100000) % tunnelPlatforms.Length;
 
             // creates a platform of the random type at the spawn point
-            GameObject platform = Instantiate(tunnelPlatforms[tunnelPlatformIndex], spawnPoint.position, spawnPoint.rotation);
+            GameObject platform = Instantiate(tunnelPlatforms[tunnelPlatformIndex], spawnPoint.position + spawnSeparation, spawnPoint.rotation);
             platform.transform.parent = transform;
             platforms.Enqueue(platform);
             // increments the count of the number of consecutive tunnel platforms that have been spawned
