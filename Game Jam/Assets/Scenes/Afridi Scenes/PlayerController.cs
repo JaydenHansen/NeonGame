@@ -10,10 +10,17 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed;
     public float moveSpeed;
     public float gravity;
+    public float damageDone;
+
+    [Range(0.0f, 100.0f)]
+    private float m_maxHealth;
+    [Range(0.0f, 100.0f)]
+    public float currentHealth;
 
     void Awake()
     {
         m_controller = GetComponent<CharacterController>();
+        m_maxHealth = currentHealth;
         m_moveDirection = Vector3.zero;
     }
 
@@ -40,11 +47,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.name == "Wall") {
+        if (other.gameObject.tag == "Wall")
+        {
             m_controller.Move(Vector3.zero);
+            currentHealth -= damageDone;
         }
-    }  
-
+    }
 }
