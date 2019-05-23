@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Manages the platform movement based on the type of platform.
+/// Manages the platform.
 /// </summary>
 public class PlatformManager : MonoBehaviour
 {
@@ -11,8 +11,7 @@ public class PlatformManager : MonoBehaviour
     public enum PlatformType
     {
         Straight,
-        Tunnel,
-        Curved
+        Tunnel
     }
 
     /// <summary>
@@ -20,11 +19,6 @@ public class PlatformManager : MonoBehaviour
     /// </summary>
     [Tooltip("The movement speed of the platform.")]
     public float moveSpeed = 10.0f;
-    /// <summary>
-    /// Rotation speed of the chunk.
-    /// </summary>
-    [Tooltip("Rotation speed of the chunk.")]
-    public float rotSpeed = 10.0f;
     /// <summary>
     /// The type of platform.
     /// </summary>
@@ -58,21 +52,6 @@ public class PlatformManager : MonoBehaviour
         if (spawnPoint.position.z < 0.0f)
         {
             Destroy(gameObject, lifeTime);
-        }
-        if (platformType == PlatformType.Curved)
-        {
-            if (transform.position.z < 0.0f)
-            {
-                if (spawnPoint.position.z > 0.0f)
-                {
-
-                }
-            }
-        }
-        // once the player gets to the curved platform it will start rotating
-        if (platformType == PlatformType.Curved && transform.position.z < 0.0f && spawnPoint.position.z > 0.0f)
-        {
-            GetComponentInParent<EndlessPlatformGenerator>().Rotate(rotSpeed);
         }
     }
 }

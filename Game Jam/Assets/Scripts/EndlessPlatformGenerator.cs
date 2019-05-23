@@ -12,11 +12,6 @@ public class EndlessPlatformGenerator : MonoBehaviour
     [Tooltip("The number of straight chunks consecutively generated before a random generation occurs again.")]
     public int numOfStraightPlatformsBeforeRegen = 10;
     /// <summary>
-    /// The number of curved chunks consecutively generated before a random generation occurs again.
-    /// </summary>
-    [Tooltip("The number of curved chunks consecutively generated before a random generation occurs again.")]
-    public int numOfCurvedPlatformsBeforeRegen = 5;
-    /// <summary>
     /// The number of tunnel chunks consecutively generated before a random generation occurs again.
     /// </summary>
     [Tooltip("The number of tunnel chunks consecutively generated before a random generation occurs again.")]
@@ -27,11 +22,6 @@ public class EndlessPlatformGenerator : MonoBehaviour
     /// </summary>
     [Tooltip("Collection of different possible straight platforms.")]
     public GameObject[] straightPlatforms;
-    /// <summary>
-    /// Collection of different possible curved platforms.
-    /// </summary>
-    [Tooltip("Collection of different possible curved platforms.")]
-    public GameObject[] curvedPlatforms;
     /// <summary>
     /// Collection of different possible tunnel platforms.
     /// </summary>
@@ -70,10 +60,6 @@ public class EndlessPlatformGenerator : MonoBehaviour
     /// </summary>
     private int m_numOfStraightPlatforms = 0;
     /// <summary>
-    /// The number of curved chunks that have been spawned.
-    /// </summary>
-    private int m_numOfCurvedPlatforms = 0;
-    /// <summary>
     /// The number of tunnel chunks that have been spawned.
     /// </summary>
     private int m_numOfTunnelPlatforms = 0;
@@ -96,79 +82,26 @@ public class EndlessPlatformGenerator : MonoBehaviour
     private void GeneratePlatform()
     {
         // checks if it is time to potentially start spawning a different type of platform
-        if (m_numOfStraightPlatforms == numOfStraightPlatformsBeforeRegen || m_numOfCurvedPlatforms == numOfCurvedPlatformsBeforeRegen || m_numOfTunnelPlatforms == numOfTunnelPlatformsBeforeRegen)
+        if (m_numOfStraightPlatforms == numOfStraightPlatformsBeforeRegen || m_numOfTunnelPlatforms == numOfTunnelPlatformsBeforeRegen)
         {
             // chooses a random odd or even number to determine the platform type
-            int typeIndex = Random.Range(-100000, 100000) % 3;
-            // even number means straight, odd means curved
-            switch (typeIndex)
+            int typeIndex = Random.Range(-100000, 100000) % 2;
+            if (typeIndex == 0)
             {
-                case 0:
-                    // checks if the collection has platforms
-                    if (straightPlatforms.Length != 0)
-                    {
-                        m_platformType = PlatformManager.PlatformType.Straight;
-                        m_numOfStraightPlatforms = 0;
-                    }
-                    else if (curvedPlatforms.Length != 0)
-                    {
-                        m_platformType = PlatformManager.PlatformType.Curved;
-                        m_numOfCurvedPlatforms = 0;
-                    }
-                    else
-                    {
-                        m_platformType = PlatformManager.PlatformType.Tunnel;
-                        m_numOfTunnelPlatforms = 0;
-                    }
-                    break;
-                case 1:
-                    // checks if the collection has platforms
-                    if (curvedPlatforms.Length != 0)
-                    {
-                        m_platformType = PlatformManager.PlatformType.Curved;
-                        m_numOfCurvedPlatforms = 0;
-                    }
-                    else if (straightPlatforms.Length != 0)
-                    {
-                        m_platformType = PlatformManager.PlatformType.Straight;
-                        m_numOfStraightPlatforms = 0;
-                    }
-                    else
-                    {
-                        m_platformType = PlatformManager.PlatformType.Tunnel;
-                        m_numOfTunnelPlatforms = 0;
-                    }
-                    break;
-                case 2:
-                    // checks if the collection has platforms
-                    if (tunnelPlatforms.Length != 0)
-                    {
-                        m_platformType = PlatformManager.PlatformType.Tunnel;
-                        m_numOfTunnelPlatforms = 0;
-                    }
-                    else if (straightPlatforms.Length != 0)
-                    {
-                        m_platformType = PlatformManager.PlatformType.Straight;
-                        m_numOfStraightPlatforms = 0;
-                    }
-                    else
-                    {
-                        m_platformType = PlatformManager.PlatformType.Curved;
-                        m_numOfCurvedPlatforms = 0;
-                    }
-                    break;
-                default:
-                    m_platformType = PlatformManager.PlatformType.Straight;
-                    m_numOfStraightPlatforms = 0;
-                    break;
+                m_platformType = PlatformManager.PlatformType.Straight;
             }
-            Debug.Log(m_platformType);
+            else
+            {
+                m_platformType = PlatformManager.PlatformType.Tunnel;
+            }
+            m_numOfStraightPlatforms = 0;
+            m_numOfTunnelPlatforms = 0;            
         }
         // checks if a straight platform should be created
         if (m_platformType == PlatformManager.PlatformType.Straight && m_numOfStraightPlatforms < numOfStraightPlatformsBeforeRegen)
         {
             // chooses a random type of straight platform
-            int straightPlatformIndex = Random.Range(-100000, 100000) % straightPlatforms.Length;
+            int straightPlatformIndex = Random.Range(0, 100000) % straightPlatforms.Length;
             // creates a platform of the random type at the spawn point
             GameObject platform = Instantiate(straightPlatforms[straightPlatformIndex], spawnPoint.position + new Vector3(0, 0, spawnSeparation), spawnPoint.rotation);
             platform.transform.parent = transform;
@@ -178,25 +111,11 @@ public class EndlessPlatformGenerator : MonoBehaviour
             // sets the spawn point for the next platform to the new platform's spawn point
             spawnPoint = platform.GetComponent<PlatformManager>().spawnPoint;
         }
-        // checks if a curved platform should be created
-        else if (m_platformType == PlatformManager.PlatformType.Curved && m_numOfCurvedPlatforms < numOfCurvedPlatformsBeforeRegen)
-        {
-            // chooses a random type of curved platform
-            int curvedPlatformIndex = Random.Range(-100000, 100000) % curvedPlatforms.Length;
-            // creates a platform of the random type at the spawn point
-            GameObject platform = Instantiate(curvedPlatforms[curvedPlatformIndex], spawnPoint.position + new Vector3(0, 0, spawnSeparation), spawnPoint.rotation);
-            platform.transform.parent = transform;
-            platforms.Enqueue(platform);
-            // increments the count of the number of consecutive curved platforms that have been spawned
-            m_numOfCurvedPlatforms++;
-            // sets the spawn point for the next platform to the new platform's spawn point
-            spawnPoint = platform.GetComponent<PlatformManager>().spawnPoint;
-        }
         // checks if a tunnel platform should be created
         else if (m_platformType == PlatformManager.PlatformType.Tunnel && m_numOfTunnelPlatforms < numOfTunnelPlatformsBeforeRegen)
         {
             // chooses a random type of curved platform
-            int tunnelPlatformIndex = Random.Range(-100000, 100000) % tunnelPlatforms.Length;
+            int tunnelPlatformIndex = Random.Range(0, 100000) % tunnelPlatforms.Length;
 
             // creates a platform of the random type at the spawn point
             GameObject platform = Instantiate(tunnelPlatforms[tunnelPlatformIndex], spawnPoint.position + new Vector3(0, 0, spawnSeparation), spawnPoint.rotation);
@@ -231,15 +150,5 @@ public class EndlessPlatformGenerator : MonoBehaviour
         {
             GeneratePlatform();
         }
-    }
-
-    /// <summary>
-    /// Rotates all chunks.
-    /// </summary>
-    /// <param name="rotSpeed">Scalar for the rotation speed.</param>
-    public void Rotate(float rotSpeed)
-    {
-        // rotates around a local up axis
-        transform.Rotate(transform.up, -rotSpeed * Time.deltaTime);
     }
 }

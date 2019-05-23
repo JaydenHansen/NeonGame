@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
 /// <summary>
-/// Triggers the player invert colours mind break.
+/// Triggers the player first person mind break.
 /// </summary>
-public class InvertColours : MonoBehaviour
+public class FirstPerson : MonoBehaviour
 {
     /// <summary>
-    /// Checks if a player collided with the trigger and changes the colour if so.
+    /// Checks if a player collided with the trigger and changes the camera to first person if so.
     /// </summary>
     /// <param name="other">The object colliding with the trigger volume.</param>
     private void OnTriggerEnter(Collider other)
@@ -14,7 +14,7 @@ public class InvertColours : MonoBehaviour
         // checks if it is a player
         if (other.tag == "Player")
         {
-            other.GetComponent<MindBreakManager>().InvertColours();
+            other.GetComponent<MindBreakManager>().FirstPerson();
         }
     }
 }
