@@ -705,11 +705,12 @@ MonoBehaviour:
   - {fileID: 2795485308055884508, guid: a3258cced6a68844d8de50310e31ecbe, type: 3}
   tunnelPlatforms:
   - {fileID: 36461173388207125, guid: 0b594ccb05dc4b3499b91810daa3ca0b, type: 3}
-  - {fileID: 6378440750930133152, guid: 00a88f38c7b8827448bf5c35ed7fc770, type: 3}
   - {fileID: 7947026128629278171, guid: bef0228d1538a1f44b7dccbbf580783b, type: 3}
   spawnPoint: {fileID: 1197065300}
   spawnDistThreshold: 100
   spawnSeparation: 0
+  moveSpeed: 10
+  difficultyScalar: 0.05
   player: {fileID: 0}
 --- !u!4 &1197065300
 Transform:

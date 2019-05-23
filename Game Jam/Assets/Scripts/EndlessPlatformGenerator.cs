@@ -43,6 +43,16 @@ public class EndlessPlatformGenerator : MonoBehaviour
     /// </summary>
     [Tooltip("The distance between the last chunk and the spawn point.")]
     public float spawnSeparation = 10.0f;
+    /// <summary>
+    /// The movement speed of the platform.
+    /// </summary>
+    [Tooltip("The movement speed of the platform.")]
+    public float moveSpeed = 10.0f;
+    /// <summary>
+    /// The increase in movement speed over time.
+    /// </summary>
+    [Tooltip("The increase in movement speed over time.")]
+    public float difficultyScalar = 0.05f;
 
     /// <summary>
     /// Collection of all spawned chunks.
@@ -150,5 +160,8 @@ public class EndlessPlatformGenerator : MonoBehaviour
         {
             GeneratePlatform();
         }
+
+        // increases the platform movement speed each frame.
+        moveSpeed += difficultyScalar * Time.deltaTime;
     }
 }

@@ -15,11 +15,6 @@ public class PlatformManager : MonoBehaviour
     }
 
     /// <summary>
-    /// The movement speed of the platform.
-    /// </summary>
-    [Tooltip("The movement speed of the platform.")]
-    public float moveSpeed = 10.0f;
-    /// <summary>
     /// The type of platform.
     /// </summary>
     [Tooltip("The type of platform.")]
@@ -29,7 +24,6 @@ public class PlatformManager : MonoBehaviour
     /// </summary>
     [Tooltip("The duration before the object is destroyed after it goes out of view.")]
     public float lifeTime;
-
     /// <summary>
     /// The location where the next platform will spawn.
     /// </summary>
@@ -40,14 +34,19 @@ public class PlatformManager : MonoBehaviour
     /// Stored move direction to reduce memory footprint.
     /// </summary>
     private Vector3 m_moveDirection = new Vector3(0, 0, -1);
+    /// <summary>
+    /// The move speed of the platform.
+    /// </summary>
+    private float m_moveSpeed;
 
     /// <summary>
     /// Moves the platform each frame.
     /// </summary>
     private void Update()
     {
+        m_moveSpeed = GetComponentInParent<EndlessPlatformGenerator>().moveSpeed;
         // moves the platform down towards the player
-        transform.Translate(m_moveDirection * moveSpeed * Time.deltaTime, Space.World);
+        transform.Translate(m_moveDirection * m_moveSpeed * Time.deltaTime, Space.World);
         // destroys the platform once it is out of view
         if (spawnPoint.position.z < 0.0f)
         {
