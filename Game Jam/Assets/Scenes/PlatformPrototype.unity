@@ -459,12 +459,12 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2.08
-  m_Radius: 0.23
+  m_Radius: 0.75
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.04
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.02, z: 0}
+  m_Center: {x: 0, y: 0.14, z: 0}
 --- !u!114 &401502749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1603,13 +1603,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaitFor_Texture
       objectReference: {fileID: 0}
+    - target: {fileID: 100112, guid: 30328276ce3faed4b99d4ec1647f5887, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 400112, guid: 30328276ce3faed4b99d4ec1647f5887, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.023365
       objectReference: {fileID: 0}
     - target: {fileID: 400112, guid: 30328276ce3faed4b99d4ec1647f5887, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.55724
+      value: -0.44
       objectReference: {fileID: 0}
     - target: {fileID: 400112, guid: 30328276ce3faed4b99d4ec1647f5887, type: 3}
       propertyPath: m_LocalPosition.z
