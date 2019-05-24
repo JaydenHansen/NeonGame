@@ -19,7 +19,6 @@ public class MenuList : MonoBehaviour
     {
         hs.LoadScoresFromFile();
         score.text = hs.scoreArray[0].ToString();
-        minutescore.text = hs.scoreArray[1].ToString();
     }
 }
 

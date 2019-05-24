@@ -76,8 +76,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3cc0bc0c259a05439189081fb66175a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 30
-  rotSpeed: 10
   platformType: 0
   lifeTime: 2
   spawnPoint: {fileID: 5722760931876965694}

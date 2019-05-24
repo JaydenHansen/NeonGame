@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
         m_moveDirection = Vector3.zero;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         PlayerControl();
     }
