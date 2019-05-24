@@ -69,6 +69,21 @@ public class EndlessPlatformGenerator : MonoBehaviour
     /// </summary>
     [Tooltip("The increase in movement speed over time.")]
     public float difficultyScalar = 0.05f;
+    /// <summary>
+    /// Maximum platform movement speed.
+    /// </summary>
+    [Tooltip("Maximum platform movement speed.")]
+    public float maxMovementSpeed = 100.0f;
+    /// <summary>
+    /// The increase in animation speed over time.
+    /// </summary>
+    [Tooltip("The increase in animation speed over time.")]
+    public float animationScalar = 0.005f;
+    /// <summary>
+    /// Maximum animation speed.
+    /// </summary>
+    [Tooltip("Maximum animation speed.")]
+    public float maxAnimationSpeed = 10.0f;
 
     /// <summary>
     /// Collection of all spawned chunks.
@@ -202,8 +217,15 @@ public class EndlessPlatformGenerator : MonoBehaviour
             GeneratePlatform();
         }
 
-        // increases the player animation speed and platform movement speed each frame.
-        moveSpeed += difficultyScalar * Time.deltaTime;
-        m_playerAnim.speed += (difficultyScalar * Time.deltaTime) / 10.0f;
+        if (moveSpeed < maxMovementSpeed)
+        {
+            // increases the platform movement speed each frame.
+            moveSpeed += difficultyScalar * Time.deltaTime;
+        }
+        if (m_playerAnim.speed < maxAnimationSpeed)
+        {
+            // increases the animation speed each frame.
+            m_playerAnim.speed += animationScalar * Time.deltaTime;
+        }
     }
 }

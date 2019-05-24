@@ -49,7 +49,10 @@ public class PlayerController : MonoBehaviour
 
     public void RestoreHealth(int restoreAmount)
     {
-        currentHealth += restoreAmount;
+        if (currentHealth < m_maxHealth)
+        {
+            currentHealth += restoreAmount;
+        }
     }
 
     void OnTriggerEnter(Collider other)
