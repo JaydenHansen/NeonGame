@@ -8,9 +8,12 @@ public class UIManager : MonoBehaviour
 {
     public Image[] healthImages;
     public TextMeshProUGUI timer;
+    public TextMeshProUGUI minutes;
     public PlayerController m_playerController;
     [HideInInspector]
     public float m_secondsCount;
+    [HideInInspector]
+    public int minuteCount;
 
     void Update()
     {
@@ -83,5 +86,11 @@ public class UIManager : MonoBehaviour
         //set timer UI
         m_secondsCount += Time.deltaTime;
         timer.text = Mathf.FloorToInt(m_secondsCount).ToString();
+        minutes.text = minuteCount.ToString();
+
+        if (m_secondsCount >= 60) {
+            minuteCount++;
+            m_secondsCount = 0;
+        }
     }
 }

@@ -7,7 +7,7 @@ public class HighScoreManager : MonoBehaviour
 {
     //creates and array for the scores
     public int[] scoreArray;
-    public int highscoreCount = 1;
+    public int highscoreCount = 2;
 
     //Where the game is found
     public string currentDirectory;

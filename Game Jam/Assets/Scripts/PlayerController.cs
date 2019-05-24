@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKey(KeyCode.Space))
                 {
                     m_moveDirection.y = jumpSpeed;
-
                 }
             }
                 m_moveDirection.y -= gravity * Time.deltaTime;
