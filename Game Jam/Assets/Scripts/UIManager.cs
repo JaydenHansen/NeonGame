@@ -92,5 +92,8 @@ public class UIManager : MonoBehaviour
             minuteCount++;
             m_secondsCount = 0;
         }
+        if (minuteCount < 0) {
+            m_secondsCount += 0.14343f;
+        }
     }
 }
