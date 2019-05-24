@@ -709,9 +709,11 @@ MonoBehaviour:
   spawnPoint: {fileID: 1197065300}
   spawnDistThreshold: 100
   spawnSeparation: 0
+  healthPickup: {fileID: 0}
+  pickupSpawnPoint: {x: 0, y: 0, z: 0}
+  pickupSpawnChance: 1
   moveSpeed: 10
   difficultyScalar: 0.05
-  player: {fileID: 0}
 --- !u!4 &1197065300
 Transform:
   m_ObjectHideFlags: 0

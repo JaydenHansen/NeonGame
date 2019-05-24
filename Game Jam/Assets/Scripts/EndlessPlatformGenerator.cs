@@ -44,6 +44,22 @@ public class EndlessPlatformGenerator : MonoBehaviour
     [Tooltip("The distance between the last chunk and the spawn point.")]
     public float spawnSeparation = 10.0f;
     /// <summary>
+    /// The object that will be instantiated on the platform.
+    /// </summary>
+    [Tooltip("Reference to the health pickup prefab.")]
+    public GameObject healthPickup;
+    /// <summary>
+    /// Displacement vector from the position of the platform the pickup is on.
+    /// </summary>
+    [Tooltip("Position of the pickup local to the platform.")]
+    public Vector3 pickupSpawnPoint;
+    /// <summary>
+    /// Chance of a pickup spawning.
+    /// </summary>
+    [Tooltip("Chance of a pickup spawning.")]
+    public int pickupSpawnChance = 1;
+
+    /// <summary>
     /// The movement speed of the platform.
     /// </summary>
     [Tooltip("The movement speed of the platform.")]
@@ -79,7 +95,7 @@ public class EndlessPlatformGenerator : MonoBehaviour
     private PlatformManager.PlatformType m_platformType = PlatformManager.PlatformType.Straight;
 
     /// <summary>
-    /// Gets the player object.
+    /// Gets the player object and animator.
     /// </summary>
     private void Start()
     {
@@ -121,6 +137,18 @@ public class EndlessPlatformGenerator : MonoBehaviour
             m_numOfStraightPlatforms++;
             // sets the spawn point for the next platform to the new platform's spawn point
             spawnPoint = platform.GetComponent<PlatformManager>().spawnPoint;
+
+            // checks if the random number generated suggests that a pickup should be spawned
+            bool spawnPickup = (Random.Range(0, 100) % pickupSpawnChance == 0) ? true : false;
+            if (spawnPickup)
+            {
+                // makes the pickup position local to the platform
+                Vector3 pickupPosition = platform.transform.position + pickupSpawnPoint;
+                // creates a pickup
+                GameObject pickup = Instantiate(healthPickup, pickupPosition, Quaternion.identity);
+                // binds the pickup to the platform
+                pickup.transform.parent = platform.transform;
+            }
         }
         // checks if a tunnel platform should be created
         else if (m_platformType == PlatformManager.PlatformType.Tunnel && m_numOfTunnelPlatforms < numOfTunnelPlatformsBeforeRegen)
@@ -136,6 +164,18 @@ public class EndlessPlatformGenerator : MonoBehaviour
             m_numOfTunnelPlatforms++;
             // sets the spawn point for the next platform to the new platform's spawn point
             spawnPoint = platform.GetComponent<PlatformManager>().spawnPoint;
+
+            // checks if the random number generated suggests that a pickup should be spawned
+            bool spawnPickup = (Random.Range(0, 100) % pickupSpawnChance == 0) ? true : false;
+            if (spawnPickup)
+            {
+                // makes the pickup position local to the platform
+                Vector3 pickupPosition = platform.transform.position + pickupSpawnPoint;
+                // creates a pickup
+                GameObject pickup = Instantiate(healthPickup, pickupPosition, Quaternion.identity);
+                // binds the pickup to the platform
+                pickup.transform.parent = platform.transform;
+            }
         }
     }
 

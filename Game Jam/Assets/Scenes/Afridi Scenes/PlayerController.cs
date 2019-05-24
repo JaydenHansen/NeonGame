@@ -10,12 +10,12 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed;
     public float moveSpeed;
     public float gravity;
-    public float damageDone;
+    public int damageDone;
 
-    [Range(0.0f, 100.0f)]
-    private float m_maxHealth;
-    [Range(0.0f, 100.0f)]
-    public float currentHealth;
+    [Range(0, 100)]
+    private int m_maxHealth;
+    [Range(0, 100)]
+    public int currentHealth;
 
     void Awake()
     {
@@ -45,6 +45,15 @@ public class PlayerController : MonoBehaviour
                 m_moveDirection.y -= gravity * Time.deltaTime;
                 m_controller.Move(m_moveDirection * Time.deltaTime);
         }
+    }
+
+    /// <summary>
+    /// Increments the current health by the restore amount.
+    /// </summary>
+    /// <param name="restoreAmount">The amount of health being added.</param>
+    public void RestoreHealth(int restoreAmount)
+    {
+        currentHealth += restoreAmount;
     }
 
     void OnTriggerEnter(Collider other)
