@@ -47,6 +47,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void RestoreHealth(int restoreAmount)
+    {
+        currentHealth += restoreAmount;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Wall")
