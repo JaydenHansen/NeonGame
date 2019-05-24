@@ -3289,6 +3289,7 @@ GameObject:
   - component: {fileID: 1082141745}
   - component: {fileID: 1082141744}
   - component: {fileID: 1082141746}
+  - component: {fileID: 1082141747}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -3319,6 +3320,7 @@ MonoBehaviour:
   - {fileID: 1132953324}
   timer: {fileID: 2065304518}
   m_playerController: {fileID: 401502749}
+  m_secondsCount: 0
 --- !u!4 &1082141745
 Transform:
   m_ObjectHideFlags: 0
@@ -3345,6 +3347,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4145a5d9b12341d4aa4b1c13200c29b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1082141747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082141743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be8f8990ada003f4d9e53b2f7407df6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreArray: 01000000
+  highscoreCount: 1
+  currentDirectory: 
+  scoreFileName: highscores.txt
 --- !u!1 &1132953322
 GameObject:
   m_ObjectHideFlags: 0
@@ -3676,6 +3694,9 @@ MonoBehaviour:
   deathCanvas: {fileID: 573017200}
   mainCanvas: {fileID: 1271882478}
   player: {fileID: 401502749}
+  scoreManager: {fileID: 1082141747}
+  scoreController: {fileID: 1082141744}
+  scoreText: {fileID: 2065304518}
 --- !u!4 &1181731245
 Transform:
   m_ObjectHideFlags: 0

@@ -9,8 +9,8 @@ public class UIManager : MonoBehaviour
     public Image[] healthImages;
     public TextMeshProUGUI timer;
     public PlayerController m_playerController;
-
-    private float m_secondsCount;
+    [HideInInspector]
+    public float m_secondsCount;
 
     void Update()
     {
