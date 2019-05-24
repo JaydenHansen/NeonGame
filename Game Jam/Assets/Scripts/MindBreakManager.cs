@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 /// <summary>
 /// Manages all mind breaking effects from the tunnel chunks.
@@ -15,6 +16,17 @@ public class MindBreakManager : MonoBehaviour
     /// </summary>
     [Tooltip("The amount of time is in first person for.")]
     public float firstPersonDuration = 5.0f;
+    /// <summary>
+    /// The amount of time the camera is distorted for.
+    /// </summary>
+    [Tooltip("The amount of time the camera is distorted for.")]
+    public float distortDuration = 5.0f;
+    /// <summary>
+    /// The amount the lens is distorted by.
+    /// </summary>
+    [Tooltip("The amount the lens is distorted by.")]
+    public float distortionAmount = 50.0f;
+    public float distortStopThreshold = 0.5f;
     /// <summary>
     /// The amount of time camera spins for.
     /// </summary>
@@ -54,6 +66,10 @@ public class MindBreakManager : MonoBehaviour
     /// </summary>
     private float m_firstPersonTimer = 0.0f;
     /// <summary>
+    /// Used to time how long the camera has been distorted.
+    /// </summary>
+    private float m_distortTimer = 0.0f;
+    /// <summary>
     /// Used to time how long the camera has been spinning.
     /// </summary>
     private float m_spinTimer = 0.0f;
@@ -65,6 +81,10 @@ public class MindBreakManager : MonoBehaviour
     /// Determines if the camera is first person.
     /// </summary>
     private bool m_isFirstPerson = false;
+    /// <summary>
+    /// Determines if the camera is distorted.
+    /// </summary>
+    private bool m_isDistorted = false;
     /// <summary>
     /// Determines if the camera is spinning.
     /// </summary>
@@ -89,6 +109,7 @@ public class MindBreakManager : MonoBehaviour
                 m_invertTimer = 0.0f;
             }
         }
+
         // checks if the camera is first person
         if (m_isFirstPerson)
         {
@@ -104,6 +125,38 @@ public class MindBreakManager : MonoBehaviour
                 m_firstPersonTimer = 0.0f;
             }
         }
+
+        if (m_isDistorted)
+        {
+            m_distortTimer += Time.deltaTime;
+            mainCam.GetComponent<PostProcessVolume>().profile.TryGetSettings(out UnityEngine.Rendering.PostProcessing.LensDistortion lensDistortion);
+            lensDistortion.intensity.value = Mathf.Sin(m_distortTimer) * distortionAmount;
+            firstPersonCam.GetComponent<PostProcessVolume>().profile.TryGetSettings(out lensDistortion);
+            lensDistortion.intensity.value = Mathf.Sin(m_distortTimer) * distortionAmount;
+            if (m_distortTimer >= distortDuration)
+            {
+                m_isDistorted = false;
+            }
+        }
+        else
+        {
+            if (m_distortTimer != 0.0f)
+            {
+                mainCam.GetComponent<PostProcessVolume>().profile.TryGetSettings(out UnityEngine.Rendering.PostProcessing.LensDistortion lensDistortion);
+                if (lensDistortion.intensity.value > 0.0f + distortStopThreshold || lensDistortion.intensity.value < 0.0f - distortStopThreshold)
+                {
+                    m_distortTimer += Time.deltaTime;
+                    lensDistortion.intensity.value = Mathf.Sin(m_distortTimer) * distortionAmount;
+                    firstPersonCam.GetComponent<PostProcessVolume>().profile.TryGetSettings(out lensDistortion);
+                    lensDistortion.intensity.value = Mathf.Sin(m_distortTimer) * distortionAmount;
+                }
+                else
+                {
+                    m_distortTimer = 0.0f;
+                }
+            }
+        }
+
         // checks if the camera is spinning
         if (m_isSpinning)
         {
@@ -155,7 +208,19 @@ public class MindBreakManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Allows the camera to spin
+    /// Allows the lens to distort.
+    /// </summary>
+    public void LensDistortion()
+    {
+        if (!m_isDistorted)
+        {
+            m_isDistorted = true;
+            m_distortTimer = 0.0f;
+        }
+    }
+
+    /// <summary>
+    /// Allows the camera to spin.
     /// </summary>
     public void SpinCamera()
     {
