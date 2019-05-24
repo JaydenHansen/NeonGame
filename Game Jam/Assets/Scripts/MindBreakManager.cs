@@ -11,6 +11,7 @@ public class MindBreakManager : MonoBehaviour
     /// </summary>
     [Tooltip("The amount of time colours are inverted for.")]
     public float invertDuration = 5.0f;
+    public float invertSpeed = 0.5f;
     /// <summary>
     /// The amount of time is in first person for.
     /// </summary>
@@ -100,13 +101,21 @@ public class MindBreakManager : MonoBehaviour
         {
             // increments the timer
             m_invertTimer += Time.deltaTime;
+            invertMat.SetColor("TintColor", Color.Lerp(Color.black, Color.white, Mathf.Clamp01(m_invertTimer * invertSpeed)));
+
             // checks if the timer ran out
             if (m_invertTimer >= invertDuration)
             {
-                // sets the colour back to normal
-                invertMat.SetColor("TintColor", Color.black);
                 m_isInverted = false;
                 m_invertTimer = 0.0f;
+            }
+        }
+        else
+        {
+            if (invertMat.GetColor("TintColor") != Color.black)
+            {
+                m_invertTimer += Time.deltaTime;
+                invertMat.SetColor("TintColor", Color.Lerp(Color.white, Color.black, Mathf.Clamp01(m_invertTimer * invertSpeed)));
             }
         }
 
@@ -191,9 +200,11 @@ public class MindBreakManager : MonoBehaviour
     /// </summary>
     public void InvertColours()
     {
-        invertMat.SetColor("TintColor", Color.white);
-        m_isInverted = true;
-        m_invertTimer = 0.0f;
+        if (!m_isInverted)
+        {
+            m_isInverted = true;
+            m_invertTimer = 0.0f;
+        }
     }
 
     /// <summary>
