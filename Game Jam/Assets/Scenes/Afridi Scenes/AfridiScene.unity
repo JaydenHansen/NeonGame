@@ -888,7 +888,7 @@ BoxCollider:
   m_GameObject: {fileID: 383094578}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1665,6 +1665,9 @@ MonoBehaviour:
   deathCanvas: {fileID: 810335232}
   mainCanvas: {fileID: 699316725}
   player: {fileID: 1513505612}
+  scoreManager: {fileID: 0}
+  scoreController: {fileID: 0}
+  scoreText: {fileID: 0}
 --- !u!4 &896568376
 Transform:
   m_ObjectHideFlags: 0
@@ -2295,13 +2298,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1513505610}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fbbe1bc0a0389743951fbf995431de1, type: 3}
+  m_Script: {fileID: 11500000, guid: fdd7203c60ac5754cb533928b1d7b006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSpeed: 8
-  moveSpeed: 15
-  gravity: 20
-  damageDone: 25
+  jumpSpeed: 10
+  moveSpeed: 20
+  gravity: 10
+  damageDone: 20
   currentHealth: 100
 --- !u!143 &1513505613
 CharacterController:
@@ -2408,7 +2411,7 @@ BoxCollider:
   m_GameObject: {fileID: 1667386486}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -2575,17 +2578,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d60dc64f8f6c6745a4ffbf10c25b697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthImages:
-  - {fileID: 1186898470}
-  - {fileID: 1462693170}
-  - {fileID: 845959466}
-  - {fileID: 597698711}
-  - {fileID: 127358057}
-  - {fileID: 654566880}
-  - {fileID: 1449298395}
-  - {fileID: 933866244}
-  timer: {fileID: 1218990196}
-  m_playerController: {fileID: 1513505612}
 --- !u!4 &2017748323
 Transform:
   m_ObjectHideFlags: 0
