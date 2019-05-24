@@ -95,6 +95,9 @@ public class EndlessPlatformGenerator : MonoBehaviour
     /// Reference to the player object.
     /// </summary>
     private GameObject m_player;
+    /// <summary>
+    /// Reference to the player animator.
+    /// </summary>
     private Animator m_playerAnim;
     /// <summary>
     /// The number of straight chunks that have been spawned.
