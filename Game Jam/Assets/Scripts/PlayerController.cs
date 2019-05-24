@@ -10,12 +10,12 @@ public class PlayerController : MonoBehaviour
     public float jumpSpeed;
     public float moveSpeed;
     public float gravity;
-    public float damageDone;
+    public int damageDone;
 
-    [Range(0.0f, 100.0f)]
-    private float m_maxHealth;
-    [Range(0.0f, 100.0f)]
-    public float currentHealth;
+    [Range(0, 100)]
+    private int m_maxHealth;
+    [Range(0, 100)]
+    public int currentHealth;
 
     void Awake()
     {
@@ -58,6 +58,10 @@ public class PlayerController : MonoBehaviour
         {
             m_controller.Move(Vector3.zero);
             currentHealth -= damageDone;
+        }
+
+        if (other.gameObject.tag == "Drop") {
+            currentHealth = 0;
         }
     }
 }
