@@ -59,12 +59,12 @@ public class EndlessPlatformGenerator : MonoBehaviour
     /// </summary>
     [HideInInspector]
     public Queue<GameObject> platforms = new Queue<GameObject>();
+
     /// <summary>
     /// Reference to the player object.
     /// </summary>
-    [HideInInspector]
-    public GameObject player;
-
+    private GameObject m_player;
+    private Animator m_playerAnim;
     /// <summary>
     /// The number of straight chunks that have been spawned.
     /// </summary>
@@ -83,7 +83,8 @@ public class EndlessPlatformGenerator : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        m_player = GameObject.FindGameObjectWithTag("Player");
+        m_playerAnim = m_player.GetComponentInChildren<Animator>();
     }
 
     /// <summary>
@@ -151,7 +152,7 @@ public class EndlessPlatformGenerator : MonoBehaviour
                 platforms.Dequeue();
             }
             // checks if the distance between player and the spawn point is less than or equal to the distance threshold
-            if (Vector3.Distance(player.transform.position, spawnPoint.position) <= spawnDistThreshold)
+            if (Vector3.Distance(m_player.transform.position, spawnPoint.position) <= spawnDistThreshold)
             {
                 GeneratePlatform();
             }
@@ -161,7 +162,8 @@ public class EndlessPlatformGenerator : MonoBehaviour
             GeneratePlatform();
         }
 
-        // increases the platform movement speed each frame.
+        // increases the player animation speed and platform movement speed each frame.
         moveSpeed += difficultyScalar * Time.deltaTime;
+        m_playerAnim.speed += (difficultyScalar * Time.deltaTime) / 10.0f;
     }
 }
